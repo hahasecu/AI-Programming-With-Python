@@ -6,4 +6,4 @@ This repository is intended to store and share my projects and exercises from th
 
 ## Table of Contents
 
-- NumPy Mini-Project [Mean normalize and separate data](./numpy)
+- NumPy Mini-Project [Mean normalize and separate data](./numpy/)
