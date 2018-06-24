@@ -222,7 +222,7 @@ amazon_stock.head(3)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>amazon_stock</th>
+      <th>Adj Close</th>
     </tr>
     <tr>
       <th>Date</th>
@@ -274,7 +274,7 @@ apple_stock.head(3)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>apple_stock</th>
+      <th>Adj Close</th>
     </tr>
     <tr>
       <th>Date</th>
@@ -1006,73 +1006,73 @@ We will now look at how we can compute some rolling statistics, also known as mo
 
 
 ```python
-# We compute the rolling mean using a 150-Day window for Google stock
-rollingMean = all_stocks['apple_stock'].rolling(3, center=True).mean()
+# We compute the rolling mean using a 3-Day window for  stock
+rollingMean = all_stocks['amazon_stock'].rolling(3).mean()
 print(rollingMean)
 ```
 
     2000-01-01           NaN
     2000-01-02           NaN
     2000-01-03           NaN
-    2000-01-04      3.410526
-    2000-01-05      3.229123
-    2000-01-06      3.196992
-    2000-01-07           NaN
+    2000-01-04           NaN
+    2000-01-05     80.354167
+    2000-01-06     72.416667
+    2000-01-07     68.291667
     2000-01-08           NaN
     2000-01-09           NaN
     2000-01-10           NaN
-    2000-01-11      2.974086
-    2000-01-12      2.963376
-    2000-01-13      3.045710
-    2000-01-14           NaN
+    2000-01-11           NaN
+    2000-01-12     66.500000
+    2000-01-13     65.416667
+    2000-01-14     64.583333
     2000-01-15           NaN
     2000-01-16           NaN
     2000-01-17           NaN
     2000-01-18           NaN
-    2000-01-19      3.470101
-    2000-01-20      3.549089
-    2000-01-21           NaN
+    2000-01-19           NaN
+    2000-01-20     65.229167
+    2000-01-21     64.541667
     2000-01-22           NaN
     2000-01-23           NaN
     2000-01-24           NaN
-    2000-01-25      3.520306
-    2000-01-26      3.560469
-    2000-01-27      3.446674
-    2000-01-28           NaN
+    2000-01-25           NaN
+    2000-01-26     68.062500
+    2000-01-27     67.000000
+    2000-01-28     64.479167
     2000-01-29           NaN
     2000-01-30           NaN
                      ...    
-    2016-12-02           NaN
+    2016-12-02    744.853353
     2016-12-03           NaN
     2016-12-04           NaN
     2016-12-05           NaN
-    2016-12-06    108.677895
-    2016-12-07    109.668900
-    2016-12-08    110.985850
-    2016-12-09           NaN
+    2016-12-06           NaN
+    2016-12-07    764.833313
+    2016-12-08    767.489990
+    2016-12-09    768.803324
     2016-12-10           NaN
     2016-12-11           NaN
     2016-12-12           NaN
-    2016-12-13    113.152234
-    2016-12-14    113.981910
-    2016-12-15    114.238716
-    2016-12-16           NaN
+    2016-12-13           NaN
+    2016-12-14    767.760010
+    2016-12-15    768.053345
+    2016-12-16    762.530009
     2016-12-17           NaN
     2016-12-18           NaN
     2016-12-19           NaN
-    2016-12-20    115.447016
-    2016-12-21    115.331784
-    2016-12-22    115.190211
-    2016-12-23           NaN
+    2016-12-20           NaN
+    2016-12-21    769.273316
+    2016-12-22    769.386658
+    2016-12-23    765.843343
     2016-12-24           NaN
     2016-12-25           NaN
     2016-12-26           NaN
     2016-12-27           NaN
-    2016-12-28    115.479942
-    2016-12-29    115.005841
-    2016-12-30           NaN
+    2016-12-28           NaN
+    2016-12-29    769.560018
+    2016-12-30    762.383341
     2016-12-31           NaN
-    Freq: D, Name: apple_stock, Length: 6210, dtype: float64
+    Freq: D, Name: amazon_stock, Length: 6210, dtype: float64
 
 
 We can also visualize the rolling mean by plotting the data in our dataframe. In the following lessons you will learn how to use **Matplotlib** to visualize data. For now I will just import matplotlib and plot the Google stock data on top of the rolling mean. You can play around by changing the rolling mean window and see how the plot changes. 
@@ -1086,12 +1086,12 @@ We can also visualize the rolling mean by plotting the data in our dataframe. In
 import matplotlib.pyplot as plt
 
 
-# We plot the Google stock data
-plt.plot(all_stocks['google_stock'])
+# We plot the Amazon stock data
+plt.plot(all_stocks['amazon_stock'])
 
-# We plot the rolling mean ontop of our Google stock data
+# We plot the rolling mean ontop of our Amazon stock data
 plt.plot(rollingMean)
-plt.legend(['Google Stock Price', 'Rolling Mean'])
+plt.legend(['Amazon Stock Price', 'Rolling Mean'])
 plt.show()
 ```
 
