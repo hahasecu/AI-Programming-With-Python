@@ -1,0 +1,779 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Statistics-from-Stock-Data}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Statistics from Stock Data}\label{statistics-from-stock-data}
+
+In this lab we will load stock data into a Pandas Dataframe and
+calculate some statistics on it. We will be working with stock data from
+Google, Apple, and Amazon. All the stock data was downloaded from yahoo
+finance in CSV format. In your workspace you should have a file named
+GOOG.csv containing the Google stock data, a file named AAPL.csv
+containing the Apple stock data, and a file named AMZN.csv containing
+the Amazon stock data. (You can see the workspace folder by clicking on
+the Jupyter logo in the upper left corner of the workspace.) All the
+files contain 7 columns of data:
+
+\textbf{Date Open High Low Close Adj\_Close Volume}
+
+We will start by reading in any of the above CSV files into a DataFrame
+and see what the data looks like.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{c+c1}{\PYZsh{} We import pandas into Python}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          
+          \PY{c+c1}{\PYZsh{} We read in a stock data data file into a data frame and see what it looks like}
+          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./GOOG.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We display the first 5 rows of the DataFrame}
+          \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}140}]:}          Date       Open       High        Low      Close  Adj Close    Volume
+          0  2004-08-19  49.676899  51.693783  47.669952  49.845802  49.845802  44994500
+          1  2004-08-20  50.178635  54.187561  49.925285  53.805050  53.805050  23005800
+          2  2004-08-23  55.017166  56.373344  54.172661  54.346527  54.346527  18393200
+          3  2004-08-24  55.260582  55.439419  51.450363  52.096165  52.096165  15361800
+          4  2004-08-25  52.140873  53.651051  51.604362  52.657513  52.657513   9257400
+\end{Verbatim}
+            
+    We clearly see that the Dataframe is has automatically labeled the row
+indices using integers and has labeled the columns of the DataFrame
+using the names of the columns in the CSV files.
+
+\section{To Do}\label{to-do}
+
+You will now load the stock data from Google, Apple, and Amazon into
+separte DataFrames. However, for each stock data you will only be
+interested in loading the \texttt{Date} and \texttt{Adj\ Close} columns
+into the Dataframe. In addtion, you want to use the \texttt{Date} column
+as your row index. Finally, you want the DataFrame to recognize the
+dates as actual dates (year/month/day) and not as strings. For each
+stock, you can accomplish all theses things in just one line of code by
+using the appropiate keywords in the \texttt{pd.read\_csv()} function.
+Here are a few hints:
+
+\begin{itemize}
+\item
+  Use the \texttt{index\_col} keyword to indicate which column you want
+  to use as an index. For example
+  \texttt{index\_col\ =\ {[}\textquotesingle{}Open\textquotesingle{}{]}}
+\item
+  Set the \texttt{parse\_dates} keyword equal to \texttt{True} to
+  convert the Dates into real dates of the form year/month/day
+\item
+  Use the \texttt{usecols} keyword to select which columns you want to
+  load into the DataFrame. For example
+  \texttt{usecols\ =\ {[}\textquotesingle{}Open\textquotesingle{},\ \textquotesingle{}High\textquotesingle{}{]}}
+\end{itemize}
+
+Fill in the code below:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{c+c1}{\PYZsh{} We load the Google stock data into a DataFrame}
+          \PY{n}{google\PYZus{}stock} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./GOOG.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{usecols}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We load the Apple stock data into a DataFrame}
+          \PY{n}{apple\PYZus{}stock} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./AAPL.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{usecols}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We load the Amazon stock data into a DataFrame}
+          \PY{n}{amazon\PYZus{}stock} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./AMZN.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{usecols}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    You can check that you have loaded the data correctly by displaying the
+head of the DataFrames.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{c+c1}{\PYZsh{} We display the google\PYZus{}stock DataFrame}
+          \PY{n}{google\PYZus{}stock}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}142}]:}             Adj Close
+          Date                 
+          2004-08-19  49.845802
+          2004-08-20  53.805050
+          2004-08-23  54.346527
+          2004-08-24  52.096165
+          2004-08-25  52.657513
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{n}{amazon\PYZus{}stock}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}143}]:}             Adj Close
+          Date                 
+          2000-01-03    89.3750
+          2000-01-04    81.9375
+          2000-01-05    69.7500
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{n}{apple\PYZus{}stock}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}144}]:}             Adj Close
+          Date                 
+          2000-01-03   3.596616
+          2000-01-04   3.293384
+          2000-01-05   3.341579
+\end{Verbatim}
+            
+    You will now join the three DataFrames above to create a single new
+DataFrame that contains all the \texttt{Adj\ Close} for all the stocks.
+Let's start by creating an empty DataFrame that has as row indices
+calendar days between \texttt{2000-01-01} and \texttt{2016-12-31}. We
+will use the \texttt{pd.date\_range()} function to create the calendar
+dates first and then we will create a DataFrame that uses those dates as
+row indices:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{c+c1}{\PYZsh{} We create calendar dates between \PYZsq{}2000\PYZhy{}01\PYZhy{}01\PYZsq{} and  \PYZsq{}2016\PYZhy{}12\PYZhy{}31\PYZsq{}}
+          \PY{n}{dates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2000\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016\PYZhy{}12\PYZhy{}31}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We create and empty DataFrame that uses the above dates as indices}
+          \PY{n}{all\PYZus{}stocks} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{dates}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{To Do}\label{to-do}
+
+You will now join the the individual DataFrames, \texttt{google\_stock},
+\texttt{apple\_stock}, and \texttt{amazon\_stock}, to the
+\texttt{all\_stocks} DataFrame. However, before you do this, it is
+necessary that you change the name of the columns in each of the three
+dataframes. This is because the column labels in the
+\texttt{all\_stocks} dataframe must be unique. Since all the columns in
+the individual dataframes have the same name, \texttt{Adj\ Close}, we
+must change them to the stock name before joining them. In the space
+below change the column label \texttt{Adj\ Close} of each individual
+dataframe to the name of the corresponding stock. You can do this by
+using the \texttt{pd.DataFrame.rename()} function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{c+c1}{\PYZsh{} Change the Adj Close column label to Google}
+          \PY{n}{google\PYZus{}stock}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{google\PYZus{}stock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{c+c1}{\PYZsh{} Change the Adj Close column label to Amazon}
+          \PY{n}{amazon\PYZus{}stock}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{amazon\PYZus{}stock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{c+c1}{\PYZsh{} Change the Adj Close column label to Apple}
+          \PY{n}{apple\PYZus{}stock}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{apple\PYZus{}stock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{google\PYZus{}stock}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:}             google\_stock
+          Date                    
+          2004-08-19     49.845802
+          2004-08-20     53.805050
+          2004-08-23     54.346527
+          2004-08-24     52.096165
+          2004-08-25     52.657513
+\end{Verbatim}
+            
+    You can check that the column labels have been changed correctly by
+displaying the datadrames
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{c+c1}{\PYZsh{} We display the google\PYZus{}stock DataFrame}
+          \PY{n}{amazon\PYZus{}stock}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}151}]:}             amazon\_stock
+          Date                    
+          2000-01-03       89.3750
+          2000-01-04       81.9375
+          2000-01-05       69.7500
+          2000-01-06       65.5625
+          2000-01-07       69.5625
+\end{Verbatim}
+            
+    Now that we have unique column labels, we can join the individual
+DataFrames to the \texttt{all\_stocks} DataFrame. For this we will use
+the \texttt{dataframe.join()} function. The function
+\texttt{dataframe1.join(dataframe2)} joins \texttt{dataframe1} with
+\texttt{dataframe2}. We will join each dataframe one by one to the
+\texttt{all\_stocks} dataframe. Fill in the code below to join the
+dataframes, the first join has been made for you:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{c+c1}{\PYZsh{} We join the Google stock to all\PYZus{}stocks}
+          \PY{n}{all\PYZus{}stocks} \PY{o}{=} \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{google\PYZus{}stock}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We join the Apple stock to all\PYZus{}stocks}
+          \PY{n}{all\PYZus{}stocks} \PY{o}{=} \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{apple\PYZus{}stock}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We join the Amazon stock to all\PYZus{}stocks}
+          \PY{n}{all\PYZus{}stocks} \PY{o}{=} \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{amazon\PYZus{}stock}\PY{p}{)}
+\end{Verbatim}
+
+
+    You can check that the dataframes have been joined correctly by
+displaying the \texttt{all\_stocks} dataframe
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{c+c1}{\PYZsh{} We display the google\PYZus{}stock DataFrame}
+          \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}153}]:}             google\_stock  apple\_stock  amazon\_stock
+          2000-01-01           NaN          NaN           NaN
+          2000-01-02           NaN          NaN           NaN
+          2000-01-03           NaN     3.596616       89.3750
+          2000-01-04           NaN     3.293384       81.9375
+          2000-01-05           NaN     3.341579       69.7500
+\end{Verbatim}
+            
+    \section{To Do}\label{to-do}
+
+Before we proceed to get some statistics on the stock data, let's first
+check that we don't have any \emph{NaN} values. In the space below check
+if there are any \emph{NaN} values in the \texttt{all\_stocks}
+dataframe. If there are any, remove any rows that have \emph{NaN}
+values:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{c+c1}{\PYZsh{} Check if there are any NaN values in the all\PYZus{}stocks dataframe}
+          \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Remove any rows that contain NaN values}
+          \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}154}]:}             google\_stock  apple\_stock  amazon\_stock
+          2004-08-19     49.845802     1.973460     38.630001
+          2004-08-20     53.805050     1.979244     39.509998
+          2004-08-23     54.346527     1.997236     39.450001
+          2004-08-24     52.096165     2.053144     39.049999
+          2004-08-25     52.657513     2.123831     40.299999
+          2004-08-26     53.606342     2.227291     40.189999
+          2004-08-27     52.732029     2.207371     39.900002
+          2004-08-30     50.675404     2.192590     38.310001
+          2004-08-31     50.854240     2.216367     38.139999
+          2004-09-01     49.801090     2.304405     38.240002
+          2004-09-02     50.427021     2.291552     39.180000
+          2004-09-03     49.681866     2.263920     38.740002
+          2004-09-07     50.461796     2.297979     38.509998
+          2004-09-08     50.819469     2.335893     38.009998
+          2004-09-09     50.824436     2.294122     38.070000
+          2004-09-10     52.324677     2.305047     38.570000
+          2004-09-13     53.402668     2.287054     40.009998
+          2004-09-14     55.384777     2.280628     42.669998
+          2004-09-15     55.638126     2.261993     42.209999
+          2004-09-16     56.616764     2.335893     42.570000
+          2004-09-17     58.365391     2.386659     42.959999
+          2004-09-20     59.294346     2.423287     43.270000
+          2004-09-21     58.539257     2.442566     43.290001
+          2004-09-22     58.807514     2.372521     41.380001
+          2004-09-23     60.019630     2.395013     41.830002
+          2004-09-24     59.527828     2.396298     40.939999
+          2004-09-27     58.747902     2.411721     39.930000
+          2004-09-28     63.020115     2.444494     39.430000
+          2004-09-29     65.116478     2.485621     40.840000
+          2004-09-30     64.381264     2.490119     40.860001
+          {\ldots}                  {\ldots}          {\ldots}           {\ldots}
+          2016-11-17    771.229980   108.598877    756.400024
+          2016-11-18    760.539978   108.707527    760.159973
+          2016-11-21    769.200012   110.357010    780.000000
+          2016-11-22    768.270020   110.426147    785.330017
+          2016-11-23    760.989990   109.863159    780.119995
+          2016-11-25    761.679993   110.416275    780.369995
+          2016-11-28    768.239990   110.198975    766.770020
+          2016-11-29    770.840027   110.090332    762.520020
+          2016-11-30    758.039978   109.161880    750.570007
+          2016-12-01    747.919983   108.144531    743.650024
+          2016-12-02    750.500000   108.549500    740.340027
+          2016-12-05    762.520020   107.769203    759.359985
+          2016-12-06    759.109985   108.598877    764.719971
+          2016-12-07    771.190002   109.665604    770.419983
+          2016-12-08    776.419983   110.742218    767.330017
+          2016-12-09    789.289978   112.549728    768.659973
+          2016-12-12    789.270020   111.907722    760.119995
+          2016-12-13    796.099976   113.774490    774.340027
+          2016-12-14    797.070007   113.774490    768.820007
+          2016-12-15    797.849976   114.396751    761.000000
+          2016-12-16    790.799988   114.544907    757.770020
+          2016-12-19    794.200012   115.206673    766.000000
+          2016-12-20    796.419983   115.512863    771.219971
+          2016-12-21    794.559998   115.621513    770.599976
+          2016-12-22    791.260010   114.860977    766.340027
+          2016-12-23    789.909973   115.088142    760.590027
+          2016-12-27    791.549988   115.819054    771.400024
+          2016-12-28    785.049988   115.325203    772.130005
+          2016-12-29    782.789978   115.295570    765.150024
+          2016-12-30    771.820007   114.396751    749.869995
+          
+          [3115 rows x 3 columns]
+\end{Verbatim}
+            
+    Now that you have eliminated any \emph{NaN} values we can now calculate
+some basic statistics on the stock prices. Fill in the code below
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{c+c1}{\PYZsh{} Print the average stock price for each stock}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Print the median stock price for each stock}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Print the standard deviation of the stock price for each stock  }
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Print the correlation between stocks}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{corr:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{all\PYZus{}stocks}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mean:
+  google\_stock    347.420229
+apple\_stock      35.222976
+amazon\_stock    166.095436
+dtype: float64
+
+median:
+  google\_stock    286.397247
+apple\_stock      17.524017
+amazon\_stock     76.980003
+dtype: float64
+
+std:
+  google\_stock    187.671596
+apple\_stock      37.945557
+amazon\_stock    189.212345
+dtype: float64
+
+corr:
+               google\_stock  apple\_stock  amazon\_stock
+google\_stock      1.000000     0.900242      0.952444
+apple\_stock       0.900242     1.000000      0.906296
+amazon\_stock      0.952444     0.906296      1.000000
+
+    \end{Verbatim}
+
+    We will now look at how we can compute some rolling statistics, also
+known as moving statistics. We can calculate for example the rolling
+mean (moving average) of the Google stock price by using the Pandas
+\texttt{dataframe.rolling().mean()} method. The
+\texttt{dataframe.rolling(N).mean()} calculates the rolling mean over an
+\texttt{N}-day window. In other words, we can take a look at the average
+stock price every \texttt{N} days using the above method. Fill in the
+code below to calculate the average stock price every 150 days for
+Google stock
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}179}]:} \PY{c+c1}{\PYZsh{} We compute the rolling mean using a 3\PYZhy{}Day window for  stock}
+          \PY{n}{rollingMean} \PY{o}{=} \PY{n}{all\PYZus{}stocks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{amazon\PYZus{}stock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{rollingMean}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2000-01-01           NaN
+2000-01-02           NaN
+2000-01-03           NaN
+2000-01-04           NaN
+2000-01-05     80.354167
+2000-01-06     72.416667
+2000-01-07     68.291667
+2000-01-08           NaN
+2000-01-09           NaN
+2000-01-10           NaN
+2000-01-11           NaN
+2000-01-12     66.500000
+2000-01-13     65.416667
+2000-01-14     64.583333
+2000-01-15           NaN
+2000-01-16           NaN
+2000-01-17           NaN
+2000-01-18           NaN
+2000-01-19           NaN
+2000-01-20     65.229167
+2000-01-21     64.541667
+2000-01-22           NaN
+2000-01-23           NaN
+2000-01-24           NaN
+2000-01-25           NaN
+2000-01-26     68.062500
+2000-01-27     67.000000
+2000-01-28     64.479167
+2000-01-29           NaN
+2000-01-30           NaN
+                 {\ldots}    
+2016-12-02    744.853353
+2016-12-03           NaN
+2016-12-04           NaN
+2016-12-05           NaN
+2016-12-06           NaN
+2016-12-07    764.833313
+2016-12-08    767.489990
+2016-12-09    768.803324
+2016-12-10           NaN
+2016-12-11           NaN
+2016-12-12           NaN
+2016-12-13           NaN
+2016-12-14    767.760010
+2016-12-15    768.053345
+2016-12-16    762.530009
+2016-12-17           NaN
+2016-12-18           NaN
+2016-12-19           NaN
+2016-12-20           NaN
+2016-12-21    769.273316
+2016-12-22    769.386658
+2016-12-23    765.843343
+2016-12-24           NaN
+2016-12-25           NaN
+2016-12-26           NaN
+2016-12-27           NaN
+2016-12-28           NaN
+2016-12-29    769.560018
+2016-12-30    762.383341
+2016-12-31           NaN
+Freq: D, Name: amazon\_stock, Length: 6210, dtype: float64
+
+    \end{Verbatim}
+
+    We can also visualize the rolling mean by plotting the data in our
+dataframe. In the following lessons you will learn how to use
+\textbf{Matplotlib} to visualize data. For now I will just import
+matplotlib and plot the Google stock data on top of the rolling mean.
+You can play around by changing the rolling mean window and see how the
+plot changes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}180}]:} \PY{c+c1}{\PYZsh{} this allows plots to be rendered in the notebook}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+          
+          \PY{c+c1}{\PYZsh{} We import matplotlib into Python}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          
+          \PY{c+c1}{\PYZsh{} We plot the Amazon stock data}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{all\PYZus{}stocks}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{amazon\PYZus{}stock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We plot the rolling mean ontop of our Amazon stock data}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{rollingMean}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amazon Stock Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
